@@ -14,10 +14,12 @@ import { IQuizGenerator } from './models/quiz-generator.interface';
 export class QuizService {
 
   words: IWord[];
+  dictUrl: string;
 
   constructor(private http: HttpClient) { }
 
   async load(url: string) {
+    this.dictUrl = url;
     this.words = await this.http.post<IWord[]>(`${env.apiUrl}/word-list`, {url}).toPromise();
   }
 
