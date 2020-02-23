@@ -1,11 +1,20 @@
 <div class="container mx-auto">
+
   <div *ngIf="isFinished()"
-    class="flex flex-row justify-center bg-gray-200 mb-4">
+       class="flex flex-row justify-center bg-gray-200 mb-4">
+
     <button
-      (click)="initTests()"
-      class="transition duration-500 bg-gray-600 hover:bg-gray-400 text-gray-800 font-medium text-lg mt-4 py-2 px-8 rounded">
-      New
+      (click)="initTests('by-definition')"
+      class="transition duration-500 bg-gray-600 hover:bg-gray-400 text-gray-800 font-medium text-lg mx-2 mt-4 py-2 px-8 rounded">
+      New tests by definition
     </button>
+
+    <button
+      (click)="initTests('by-word')"
+      class="transition duration-500 bg-gray-600 hover:bg-gray-400 text-gray-800 font-medium text-lg mx-2 mt-4 py-2 px-8 rounded">
+      New tests by word
+    </button>
+
   </div>
 
   <app-test *ngIf="tests.length"

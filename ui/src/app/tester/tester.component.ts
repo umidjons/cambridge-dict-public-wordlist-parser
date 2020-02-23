@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from '../services/quiz.service';
 import { IAnswer, IQuiz } from '../services/quiz.interface';
+import { QuizGeneratorType } from '../services/models/quiz-generator.enum';
 
 @Component({
   selector: 'app-tester',
@@ -19,11 +20,11 @@ export class TesterComponent implements OnInit {
     this.tests = [];
 
     await this.quizService.load('https://dictionary.cambridge.org/us/plus/wordlist/24986999_toefl400_9');
-    this.initTests();
+    this.initTests(QuizGeneratorType.byDefinition);
   }
 
-  initTests() {
-    this.tests = this.quizService.generate();
+  initTests(type) {
+    this.tests = this.quizService.generate(10, type);
 
     this.currentIndex = 0;
     this.currentTest = this.tests[this.currentIndex];
