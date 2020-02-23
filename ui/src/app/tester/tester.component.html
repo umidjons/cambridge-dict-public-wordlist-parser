@@ -1,0 +1,20 @@
+<div class="container mx-auto">
+  <app-test *ngIf="tests.length"
+            [num]="currentIndex + 1"
+            [test]="currentTest"
+            (onAnswer)="checkAndAdvance($event)"
+  ></app-test>
+
+  <div class="flex flex-row justify-center bg-gray-200 mb-4">
+    <div
+      *ngFor="let test of tests; let idx=index"
+      class="text-gray-700 text-center bg-gray-300 px-4 py-2 m-2"
+      [class.bg-gray-400]="idx === currentIndex"
+      [class.bg-green-200]="test.isCorrect"
+      [class.bg-red-200]="test.isCorrect != null && false === test.isCorrect"
+    >
+      {{idx + 1}}
+    </div>
+  </div>
+
+</div>
