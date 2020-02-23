@@ -1,7 +1,7 @@
+import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from '../../environments/environment';
-import * as _ from 'lodash';
 
 import { IAnswer, IQuiz, IWord } from './quiz.interface';
 

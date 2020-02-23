@@ -19,6 +19,10 @@ export class TesterComponent implements OnInit {
     this.tests = [];
 
     await this.quizService.load('https://dictionary.cambridge.org/us/plus/wordlist/24986999_toefl400_9');
+    this.initTests();
+  }
+
+  initTests() {
     this.tests = this.quizService.generate();
 
     this.currentIndex = 0;
@@ -35,6 +39,10 @@ export class TesterComponent implements OnInit {
   checkAndAdvance(answer: IAnswer) {
     this.quizService.check(this.currentTest, answer);
     this.next();
+  }
+
+  isFinished(): boolean {
+    return this.currentIndex + 1 === this.tests.length && this.currentTest.isCorrect != null;
   }
 
 }
