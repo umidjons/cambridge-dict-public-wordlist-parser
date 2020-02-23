@@ -1,7 +1,16 @@
+const express = require('express');
 const parser = require('./word-list-parser');
 
-(async function () {
-    const URL = 'https://dictionary.cambridge.org/us/plus/wordlist/24986999_toefl400_9';
-    const words = await parser(URL);
-    console.log(words);
-})();
+const PORT = process.env.PORT || 3000;
+const app = express();
+
+app.use(express.json());
+
+app.post('/word-list', async (req, res) => {
+    const words = await parser(req.body.url);
+    res.json(words);
+});
+
+app.listen(PORT, () => {
+    console.log('Listening on port', PORT);
+});
