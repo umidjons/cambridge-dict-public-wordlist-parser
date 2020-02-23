@@ -14,10 +14,10 @@
             (onAnswer)="checkAndAdvance($event)"
   ></app-test>
 
-  <div class="flex flex-row justify-center bg-gray-200 mb-4">
+  <div class="flex flex-row flex-wrap justify-center bg-gray-200 mb-4">
     <div
       *ngFor="let test of tests; let idx=index"
-      class="text-gray-700 text-center bg-gray-300 px-4 py-2 m-2"
+      class="text-gray-700 text-center bg-gray-300 px-2 py-1 m-0"
       [class.bg-gray-400]="idx === currentIndex"
       [class.bg-green-200]="test.isCorrect"
       [class.bg-red-200]="test.isCorrect != null && false === test.isCorrect"
