@@ -25,6 +25,19 @@ function getPhrases($, $entries) {
 }
 
 /**
+ * Retrieves phrases from the given entries cheerio object
+ * @param $ cheerio reference
+ * @param $entries cheerio entries that contain phrases' type
+ * @return {string[]} list of types
+ */
+function getPhrasesTypes($, $entries) {
+    return $entries.find('.phrase').siblings('.pos')
+        .map(function (idx, elem) {
+            return $(this).text().trim();
+        }).toArray();
+}
+
+/**
  * Retrieves definitions from the given entries cheerio object
  * @param $ cheerio reference
  * @param $entries cheerio entries that contain definitions
@@ -41,13 +54,15 @@ function getDefinitions($, $entries) {
  * Maps phrases to definitions
  * @param {string[]} phrases
  * @param {string[]} definitions
+ * @param {string[]} types
  * @return {{word: string, definition: string}[]} normalized entries
  */
-function normalize(phrases, definitions) {
+function normalize(phrases, definitions, types) {
     return phrases.map((phrase, index) => {
         return {
             word: phrase,
             definition: definitions[index],
+            type: types[index],
         };
     });
 }
@@ -61,7 +76,8 @@ function getWords($) {
     const $entries = $('.wordlist-panel ul li.wordlistentry-row');
     const phrases = getPhrases($, $entries);
     const definitions = getDefinitions($, $entries);
-    return normalize(phrases, definitions);
+    const types = getPhrasesTypes($, $entries);
+    return normalize(phrases, definitions, types);
 }
 
 /**

@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const parser = require('./word-list-parser');
+const parser = require('./modules/word-list-parser');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
