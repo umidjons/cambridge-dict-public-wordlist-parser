@@ -26,10 +26,21 @@ export class QuizService {
   generate(quantity: number = 50, type: QuizGeneratorType = QuizGeneratorType.byDefinition): IQuiz[] {
     const result = [];
     const qty = Math.min(quantity, this.words.length);
-    let generator: IQuizGenerator = this.getGenerator(type);
+    const generator: IQuizGenerator = this.getGenerator(type);
 
-    for (let i = 0; i < qty; i++) {
-      result.push(generator.question(this.words, 4));
+    const added = [];
+
+    while (true) {
+      const test = generator.question(this.words, 4);
+
+      if (!added.includes(test.question)) {
+        result.push(test);
+        added.push(test.question);
+      }
+
+      if (result.length >= qty) {
+        break;
+      }
     }
 
     return result;
