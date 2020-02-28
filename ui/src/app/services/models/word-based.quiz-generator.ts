@@ -10,7 +10,7 @@ export class WordBasedQuizGenerator implements IQuizGenerator {
 
     return {
       question: chosen.word,
-      answers: this.answers(chosen, shuffled, answerQty),
+      answers: this.answers(chosen, shuffled.slice(1), answerQty),
       showed: 0
     };
   }
@@ -18,6 +18,7 @@ export class WordBasedQuizGenerator implements IQuizGenerator {
   answers(chosenWord: IWord, words: IWord[], quantity = 4): IAnswer[] {
     const filtered = words
       .filter(word => chosenWord.word !== word.word)
+      .filter(word => chosenWord.definition !== word.definition)
       .slice(0, Math.min(quantity, words.length))
       .concat([chosenWord]);
 

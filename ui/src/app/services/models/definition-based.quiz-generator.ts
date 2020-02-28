@@ -10,7 +10,7 @@ export class DefinitionBasedQuizGenerator implements IQuizGenerator {
 
     return {
       question: chosen.definition,
-      answers: this.answers(chosen, shuffled, answerQty),
+      answers: this.answers(chosen, shuffled.slice(1), answerQty),
       showed: 0
     };
   }
@@ -18,6 +18,7 @@ export class DefinitionBasedQuizGenerator implements IQuizGenerator {
   answers(chosenWord: IWord, words: IWord[], quantity = 4): IAnswer[] {
     const filtered = words
       .filter(word => chosenWord.definition !== word.definition)
+      .filter(word => chosenWord.word !== word.word)
       .slice(0, Math.min(quantity, words.length))
       .concat([chosenWord]);
 
